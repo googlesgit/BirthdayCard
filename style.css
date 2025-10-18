@@ -229,3 +229,35 @@ button:hover {
     font-size: 1em;
   }
 }
+
+/* Footer credit */
+.credit {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;                        /* above screens */
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.95);
+  background: rgba(0,0,0,0.18);       /* subtle pill behind text */
+  padding: 6px 14px;
+  border-radius: 9999px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  letter-spacing: 0.2px;
+}
+
+.credit .author,
+.credit .recipient {
+  font-weight: 600;
+}
+
+/* mobile tweaks */
+@media (max-width: 600px) {
+  .credit {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    bottom: 8px;
+  }
+}
