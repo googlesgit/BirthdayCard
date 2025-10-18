@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* RESET / BASE */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  height: 100vh;
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* SCREEN LAYOUT & TRANSITIONS */
+.screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.98);
+  pointer-events: none;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.screen.active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+/* THEME: unified pastel for screen1 + screen2, warm glow for screen3 */
+:root {
+  --pastel-a: #f9a8d4; /* pink-300 */
+  --pastel-b: #c084fc; /* violet-400 */
+  --final-a:  #fbcfe8; /* pink-200 */
+  --final-b:  #fde68a; /* amber-200 */
+}
+
+/* Screen backgrounds */
+#screen1,
+#screen2 {
+  background: radial-gradient(1200px 800px at 20% 20%, rgba(255,255,255,0.18), transparent 60%),
+              radial-gradient(1000px 700px at 80% 30%, rgba(255,255,255,0.12), transparent 60%),
+              linear-gradient(135deg, var(--pastel-a), var(--pastel-b));
+}
+#screen3 {
+  background: radial-gradient(1000px 700px at 30% 70%, rgba(255,255,255,0.16), transparent 60%),
+              linear-gradient(135deg, var(--final-a), var(--final-b));
+}
+
+/* CARD / CONTENT */
+.content {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  border-radius: 25px;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+  text-align: center;
+  width: 90%;
+  max-width: 480px;
+  animation: floatIn 1s ease;
+}
+@keyframes floatIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* FORMS */
+input {
+  margin-top: 15px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  width: 80%;
+  font-size: 1em;
+  text-align: center;
+}
+button {
+  margin-top: 15px;
+  background-color: #fff;
+  color: #f472b6;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+button:hover {
+  background-color: #ffe4e6;
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+.message {
+  margin-top: 10px;
+  color: #fff8f9;
+  font-size: 0.95em;
+}
+.hint {
+  margin-top: 6px;
+  color: #fff0f3;
+  font-style: italic;
+  font-size: 0.85em;
+}
+
+/* POEM CARD */
+.card {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  padding: 40px 30px;
+  width: 90%;
+  max-width: 550px;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  z-index: 2;
+}
+.poem-line {
+  opacity: 0;
+  transform: translateY(10px);
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin: 6px 0;
+  animation: fadeInLine 1s forwards;
+}
+@keyframes fadeInLine {
+  to { opacity: 1; transform: translateY(0); }
+}
+.signature {
+  font-style: italic;
+  margin-top: 20px;
+  opacity: 0;
+  font-size: 1.2em;
+  animation: fadeInSignature 2s forwards;
+}
+@keyframes fadeInSignature {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* OPTIONAL: subtle end glow on card */
+.glow { animation: glowFade 4s ease forwards; }
+@keyframes glowFade {
+  from { box-shadow: 0 0 20px rgba(255,255,255,0.2); }
+  to   { box-shadow: 0 0 80px rgba(255,255,255,0.5); }
+}
+
+/* FLOATING ELEMENTS (final screen) */
+.hearts, .sparkles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+.heart, .sparkle {
+  position: absolute;
+  opacity: 0.8;
+}
+.heart {
+  color: #fff;
+  font-size: 20px;
+  animation: float 8s infinite ease-in;
+}
+.sparkle {
+  color: #ffe4e6;
+  font-size: 10px;
+  animation: twinkle 3s infinite ease-in-out;
+}
+@keyframes float {
+  0%   { transform: translateY(100vh) scale(0.8); opacity: 0; }
+  50%  { opacity: 1; }
+  100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; }
+  50%      { opacity: 1; }
+}
+
+/* MUTE BUTTON */
+.mute {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  background: rgba(255,255,255,.85);
+  color: #f472b6;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  z-index: 10;
+}
+
+/* REDUCED MOTION RESPECT */
+@media (prefers-reduced-motion: reduce) {
+  .screen { transition: none; transform: none; }
+  .poem-line, .signature { animation: none; opacity: 1; transform: none; }
+  .heart, .sparkle { animation: none; }
+}
+/* MOBILE VIEW OPTIMIZATION */
+@media (max-width: 600px) {
+  body {
+    font-size: 0.95rem;
+  }
+  .content {
+    width: 92%;
+    padding: 25px 20px;
+    border-radius: 20px;
+  }
+  input {
+    width: 95%;
+    font-size: 1em;
+    padding: 12px 10px;
+  }
+  button {
+    width: 90%;
+    padding: 12px;
+    font-size: 1em;
+    border-radius: 10px;
+  }
+  .card {
+    width: 95%;
+    padding: 30px 20px;
+  }
+  .poem-line {
+    font-size: 1em;
+    line-height: 1.4;
+  }
+  .signature {
+    font-size: 1em;
+  }
+}
