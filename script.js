@@ -50,6 +50,8 @@ passBtn.addEventListener("click", () => {
       hint.classList.remove("hidden");
     } else if (wrongTries === 2) {
       passMsg.textContent = "Try one more time 😉";
+    } else if (wrongTries === 3) {
+      passMsg.textContent = "Try one last time, you’ve got this 💪";
     } else {
       passMsg.textContent = "You don’t remember… text Sai to know your password 📱";
     }
@@ -109,6 +111,9 @@ function startPoem() {
   const music = document.getElementById("music");
   const muteBtn = document.getElementById("muteBtn");
 
+  // 🧹 Clear poem content before adding again
+  poemContainer.innerHTML = "";
+
   const tryPlay = () => music.play().catch(() => {});
   document.addEventListener("click", tryPlay, { once: true });
 
@@ -135,6 +140,7 @@ function startPoem() {
 
   setTimeout(() => poemContainer.classList.add("glow"), (poemLines.length + 1) * 800);
 
+  // ❤️ Hearts (keep multiplying with each visit)
   const hearts = document.querySelector(".hearts");
   for (let i = 0; i < 25; i++) {
     const heart = document.createElement("div");
@@ -146,7 +152,9 @@ function startPoem() {
     hearts.appendChild(heart);
   }
 
+  // ✨ Sparkles (refresh per visit)
   const sparkles = document.querySelector(".sparkles");
+  sparkles.innerHTML = "";
   for (let i = 0; i < 30; i++) {
     const sparkle = document.createElement("div");
     sparkle.classList.add("sparkle");
