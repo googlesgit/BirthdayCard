@@ -50,8 +50,6 @@ passBtn.addEventListener("click", () => {
       hint.classList.remove("hidden");
     } else if (wrongTries === 2) {
       passMsg.textContent = "Try one more time 😉";
-    } else if (wrongTries === 3) {
-      passMsg.textContent = "Try one last time, you’ve got this 💪";
     } else {
       passMsg.textContent = "You don’t remember… text Sai to know your password 📱";
     }
@@ -159,3 +157,11 @@ function startPoem() {
     sparkles.appendChild(sparkle);
   }
 }
+
+// === Prevent spacebar scrolling only on final screen ===
+window.addEventListener('keydown', function(e) {
+  const activeScreen = document.querySelector('.screen.active');
+  if (activeScreen && activeScreen.id === 'screen3' && e.code === 'Space' && e.target === document.body) {
+    e.preventDefault();
+  }
+});
